@@ -1,0 +1,49 @@
+{% extends 'school/base.html' %}
+
+{% block content %}
+<div class="row">
+  <div class="col-12">
+    <h1 class="mb-4">Dashboard</h1>
+  </div>
+</div>
+
+<div class="row mb-4">
+  <div class="col-md-4">
+    <div class="card text-white bg-primary mb-3">
+      <div class="card-body">
+        <h5 class="card-title">Students</h5>
+        <p class="card-text fs-2">{{ student_count }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card text-white bg-success mb-3">
+      <div class="card-body">
+        <h5 class="card-title">Subjects</h5>
+        <p class="card-text fs-2">{{ subject_count }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card text-white bg-warning mb-3">
+      <div class="card-body">
+        <h5 class="card-title">Books</h5>
+        <p class="card-text fs-2">{{ book_count }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <table class="table table-striped">
+      <thead><tr><th>Item</th><th>Count</th></tr></thead>
+      <tbody>
+        <tr><td>Attendances</td><td>{{ attendance_count }}</td></tr>
+        <tr><td>Marks</td><td>{{ mark_count }}</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}

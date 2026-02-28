@@ -1,0 +1,93 @@
+{% extends 'school/base.html' %}
+{% load school_extras %}
+
+{% block content %}
+<div class="card shadow-sm">
+  <div class="card-body">
+    <div class="d-flex justify-content-between">
+      <div>
+        <h2>{{ student.first_name }} {{ student.last_name }}</h2>
+        <p class="text-muted">ID: {{ student.student_id }}{% if student.classroom %} • {{ student.classroom }}{% endif %}</p>
+      </div>
+      <div>
+        <a class="btn btn-outline-secondary" href="/admin/school/student/{{ student.id }}/change/">Edit</a>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <div class="col-md-6">
+        <h5>Subjects</h5>
+        <ul class="list-group mb-3">
+          {% for sub in subjects %}
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            {{ sub.name }}
+            <span class="badge bg-secondary">Skipped: {{ skipped|get_item:sub }}</span>
+          </li>
+          {% empty %}
+          <li class="list-group-item">No subjects assigned.</li>
+          {% endfor %}
+        </ul>
+        <!DOCTYPE html>
+<html>
+<head>
+    <title>My Project</title>
+</head>
+<body>
+    <h1>Frontend Working </h1>
+</body>
+</html>
+
+        <h5>Books</h5>
+        {% for subject, books in books_by_subject.items %}
+        <div class="mb-2">
+          <strong>{{ subject.name }}</strong>
+          <ul class="list-unstyled ms-3">
+            {% for b in books %}
+            <li><a href="{{ b.link }}" target="_blank">{{ b.title }}</a> {% if b.author %}— <small class="text-muted">{{ b.author }}</small>{% endif %}</li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% empty %}
+        <p class="text-muted">No study books found.</p>
+        {% endfor %}
+      </div>
+
+      <div class="col-md-6">
+        <h5>Recent Attendance</h5>
+        <table class="table table-sm">
+          <thead><tr><th>Date</th><th>Subject</th><th>Status</th></tr></thead>
+          <tbody>
+            {% for a in attendances %}
+            <tr>
+              <td>{{ a.date }}</td>
+              <td>{% if a.subject %}{{ a.subject.name }}{% else %}-{% endif %}</td>
+              <td>{{ a.get_status_display }}</td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="3">No attendance records.</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+        <h5>Recent Marks</h5>
+        <table class="table table-sm">
+          <thead><tr><th>Subject</th><th>Marks</th><th>Date</th></tr></thead>
+          <tbody>
+            {% for m in marks %}
+            <tr>
+              <td>{{ m.subject.name }}</td>
+              <td>{{ m.obtained }} / {{ m.total }}</td>
+              <td>{{ m.exam_date }}</td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="3">No marks recorded.</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
